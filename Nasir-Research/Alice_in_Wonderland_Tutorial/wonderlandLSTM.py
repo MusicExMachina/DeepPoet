@@ -62,32 +62,32 @@ checkpoint = ModelCheckpoint(filepath, monitor = 'loss', verbose=1, save_best_on
 callbacks_list = [checkpoint]
 
 #fit our model to the data
-model.fit(X,y, epochs = 50, batch_size = 64, callbacks = callbacks_list)
+#model.fit(X,y, epochs = 50, batch_size = 64, callbacks = callbacks_list)
 
 #load the network weights
-#filename = "weights-improvement-19-1.9241.hdf5"
-#model.load_weights(filename)
-#model.compile(loss='categorical_crossentropy', optimizer = 'adam')
-#
-##create a reverse mapping so that we can convert the integers back to characters
-#int_to_char = dict((i,c) for i, c in enumerate(chars))
-#
-##pick a random seed
-#start = numpy.random.randint(0,len(dataX)-1)
-#pattern = dataX[start]
-#print ("Seed:")
-#print("\"", ''.join([int_to_char[value] for value in pattern]), "\"")
-##generate characters
-#for i in range(1000):
-#    x= numpy.reshape(pattern,(1,len(pattern),1))
-#    x = x / float(n_vocab)
-#    prediction = model.predict(x,verbose=0)
-#    index = numpy.argmax(prediction)
-#    result = int_to_char[index]
-#    seq_in = [int_to_char[value] for value in pattern]
-#    sys.stdout.write(result)
-#    pattern.append(index)
-#    pattern = pattern[1:len(pattern)]
+filename = "weights-improvement-49-1.2427-bigger.hdf5"
+model.load_weights(filename)
+model.compile(loss='categorical_crossentropy', optimizer = 'adam')
+
+#create a reverse mapping so that we can convert the integers back to characters
+int_to_char = dict((i,c) for i, c in enumerate(chars))
+
+#pick a random seed
+start = numpy.random.randint(0,len(dataX)-1)
+pattern = dataX[start]
+print ("Seed:")
+print("\"", ''.join([int_to_char[value] for value in pattern]), "\"")
+#generate characters
+for i in range(1000):
+    x= numpy.reshape(pattern,(1,len(pattern),1))
+    x = x / float(n_vocab)
+    prediction = model.predict(x,verbose=0)
+    index = numpy.argmax(prediction)
+    result = int_to_char[index]
+    seq_in = [int_to_char[value] for value in pattern]
+    sys.stdout.write(result)
+    pattern.append(index)
+    pattern = pattern[1:len(pattern)]
 #print("\nDone")
 
 
